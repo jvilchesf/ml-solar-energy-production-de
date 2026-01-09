@@ -13,7 +13,7 @@ dev = [
 ]
 
 [tool.uv.workspace]
-members = ["services/extraction"]
+members = ["services/extraction", "services/features"]
 
 [tool.ruff]
 line-length = 100

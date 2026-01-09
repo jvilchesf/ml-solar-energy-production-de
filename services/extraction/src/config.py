@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     """Extraction service configuration."""
 
     # Kafka
-    kafka_bootstrap_servers: str = Field(default="localhost:9092")
+    kafka_bootstrap_servers: str = Field(default="localhost:30092")
     kafka_topic_solar: str = Field(default="solar_production_raw")
     kafka_topic_weather: str = Field(default="weather_raw")
 
