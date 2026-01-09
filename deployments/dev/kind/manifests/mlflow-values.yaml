@@ -1,0 +1,42 @@
+# MLflow Tracking Server Configuration
+tracking:
+  enabled: true
+
+  service:
+    type: ClusterIP
+    ports:
+      http: 80
+
+  extraEnvVars:
+    - name: MLFLOW_S3_ENDPOINT_URL
+      value: "http://risingwave-minio.risingwave.svc.cluster.local:9000"
+    - name: AWS_ACCESS_KEY_ID
+      value: "admin"
+    - name: AWS_SECRET_ACCESS_KEY
+      value: "admin123456"
+
+# Disable run component (we only need tracking)
+run:
+  enabled: false
+
+# Use external PostgreSQL (from RisingWave)
+postgresql:
+  enabled: false
+
+externalDatabase:
+  host: risingwave-postgresql.risingwave.svc.cluster.local
+  port: 5432
+  database: mlflow
+  user: mlflow
+  password: mlflow
+
+# Use external MinIO (from RisingWave)
+minio:
+  enabled: false
+
+externalS3:
+  host: risingwave-minio.risingwave.svc.cluster.local
+  port: 9000
+  protocol: http
+  bucket: mlflow-artifacts
+  serveArtifacts: true

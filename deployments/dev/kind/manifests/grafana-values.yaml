@@ -1,0 +1,27 @@
+adminUser: admin
+adminPassword: admin123456
+
+persistence:
+  enabled: true
+  size: 1Gi
+
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: RisingWave
+        type: postgres
+        url: risingwave.risingwave.svc.cluster.local:4567
+        database: dev
+        user: root
+        secureJsonData:
+          password: ""
+        jsonData:
+          sslmode: disable
+          maxOpenConns: 10
+          maxIdleConns: 10
+          connMaxLifetime: 14400
+
+service:
+  type: ClusterIP
+  port: 3000

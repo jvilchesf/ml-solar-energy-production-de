@@ -1,0 +1,51 @@
+# Use bundled dependencies (PostgreSQL + MinIO)
+tags:
+  bundle: true
+
+# Standalone mode for local development
+standalone:
+  enabled: true
+
+compactMode:
+  enabled: true
+
+# State store configuration - using bundled MinIO
+stateStore:
+  minio:
+    enabled: true
+    endpoint: "risingwave-minio:9000"
+    bucket: "risingwave"
+    authentication:
+      username: "admin"
+      password: "admin123456"
+
+# Meta store configuration - using bundled PostgreSQL
+metaStore:
+  postgresql:
+    enabled: true
+    host: "risingwave-postgresql"
+    port: 5432
+    database: "risingwave"
+    authentication:
+      username: "postgres"
+      password: "postgres"
+
+# MinIO subchart configuration
+minio:
+  auth:
+    rootUser: admin
+    rootPassword: admin123456
+  defaultBuckets: "risingwave,mlflow-artifacts"
+  persistence:
+    enabled: true
+    size: 10Gi
+
+# PostgreSQL subchart configuration
+postgresql:
+  auth:
+    postgresPassword: postgres
+    database: risingwave
+  primary:
+    persistence:
+      enabled: true
+      size: 8Gi
